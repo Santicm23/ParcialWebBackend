@@ -18,6 +18,8 @@ public class JugadorDTO {
         this.nombres = jugador.getNombres();
         this.apellidos = jugador.getApellidos();
         this.numero = jugador.getNumero();
-        this.equipo = jugador.getEquipo().getNombre();
+        if (jugador.getEquipo() != null)
+            this.equipo = jugador.getEquipo().getNombre();
+        else this.equipo = null;
     }
 }
