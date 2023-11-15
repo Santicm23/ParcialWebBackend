@@ -1,5 +1,6 @@
 package com.example.ParcialWeb.controllers;
 
+import com.example.ParcialWeb.dtos.JugadorDTO;
 import com.example.ParcialWeb.models.Jugador;
 import com.example.ParcialWeb.services.JugadorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +17,31 @@ public class JugadorController {
 
     @GetMapping(value = "/jugadores", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<Jugador> getJugadores() {
+    public List<JugadorDTO> getJugadores() {
         return jugadorService.getJugadores();
     }
 
     @GetMapping(value = "/jugador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public Jugador getJugadorById(@PathVariable Long id) {
+    public JugadorDTO getJugadorById(@PathVariable Long id) {
         return jugadorService.getJugadorById(id);
     }
 
     @PostMapping(value = "/jugador", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public Jugador postJugador(@RequestBody Jugador jugador) {
+    public JugadorDTO postJugador(@RequestBody Jugador jugador) {
         return jugadorService.postJugador(jugador);
     }
 
     @PutMapping(value = "/jugador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public Jugador putJugador(@PathVariable Long id, @RequestBody Jugador jugador) {
+    public JugadorDTO putJugador(@PathVariable Long id, @RequestBody Jugador jugador) {
         return jugadorService.putJugador(id, jugador);
     }
 
     @DeleteMapping(value = "/jugador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public Jugador deleteJugador(@PathVariable Long id) {
+    public JugadorDTO deleteJugador(@PathVariable Long id) {
         return jugadorService.deleteJugador(id);
     }
 }

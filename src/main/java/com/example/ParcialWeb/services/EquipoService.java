@@ -1,5 +1,6 @@
 package com.example.ParcialWeb.services;
 
+import com.example.ParcialWeb.dtos.EquipoDTO;
 import com.example.ParcialWeb.models.Equipo;
 import com.example.ParcialWeb.repositories.EquipoRepository;
 import org.springframework.beans.BeanUtils;
@@ -17,32 +18,36 @@ public class EquipoService {
         this.equipoRepository = equipoRepository;
     }
 
-    public List<Equipo> getEquipos() {
-        return (List<Equipo>) equipoRepository.findAll();
+    public List<EquipoDTO> getEquipos() {
+        List<Equipo> equipos = (List<Equipo>) equipoRepository.findAll();
+        return equipos.stream().map(EquipoDTO::new).toList();
     }
 
-    public Equipo getEquipoById(Long id) {
-        return equipoRepository.findById(id).orElse(null);
+    public EquipoDTO getEquipoById(Long id) {
+        Equipo equipo = equipoRepository.findById(id).orElse(null);
+        if (equipo == null) return null;
+        return new EquipoDTO(equipo);
     }
 
-    public Equipo postEquipo(Equipo equipo) {
-        return equipoRepository.save(equipo);
+    public EquipoDTO postEquipo(Equipo equipo) {
+        return new EquipoDTO(equipoRepository.save(equipo));
     }
 
-    public Equipo putEquipo(Long id, Equipo equipo) {
-        Equipo equipoTemp = getEquipoById(id);
+    public EquipoDTO putEquipo(Long id, Equipo equipo) {
+        Equipo equipoTemp = equipoRepository.findById(id).orElse(null);
 
         if (equipoTemp == null) return null;
 
         BeanUtils.copyProperties(equipo, equipoTemp);
 
-        return equipoRepository.save(equipo);
+        return new EquipoDTO(equipoRepository.save(equipo));
     }
 
-    public Equipo deleteEquipo(Long id) {
-        Equipo equipoTemp = getEquipoById(id);
+    public EquipoDTO deleteEquipo(Long id) {
+        Equipo equipoTemp = equipoRepository.findById(id).orElse(null);
+        if (equipoTemp == null) return null;
         equipoRepository.deleteById(id);
 
-        return equipoTemp;
+        return new EquipoDTO(equipoTemp);
     }
 }
