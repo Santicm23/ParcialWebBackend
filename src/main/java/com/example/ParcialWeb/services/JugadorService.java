@@ -1,7 +1,6 @@
 package com.example.ParcialWeb.services;
 
 import com.example.ParcialWeb.dtos.JugadorDTO;
-import com.example.ParcialWeb.models.Equipo;
 import com.example.ParcialWeb.models.Jugador;
 import com.example.ParcialWeb.repositories.JugadorRepository;
 import org.springframework.beans.BeanUtils;
